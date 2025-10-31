@@ -80,7 +80,7 @@ func (service *UserServiceImpl) Register(ctx context.Context, tx *sql.Tx, reques
 
 	existingUser, _ := service.UserRepository.FindByEmail(ctx, tx, request.Email)
 	if existingUser.Id != 0 {
-		return web.UserResponse{}, fmt.Errorf("email sudah digunakan")
+		return web.UserResponse{}, fmt.Errorf("email already registered")
 	}
 
 	hashed, err := util.HashPassword(request.Password)
