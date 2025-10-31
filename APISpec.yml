@@ -1,0 +1,200 @@
+openapi: '3.0.3'
+info:
+  title: "Product RESTful API"
+  description: "API Specification for Product Service"
+  version: '1.0'
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /produtcs:
+    get:
+      security:
+        - ProductAuth: []
+      tags:
+        - Products API
+      description: List all Products
+      summary: List all Products
+      responses:
+        '200':
+          description: Succes get all Products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  status:
+                    type: string
+                    example: "OK"
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+    
+    post: 
+      security:
+        - ProductAuth: []
+      tags:
+        - Products API
+      description: Create new Products
+      summary: Create new Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateProduct'
+      responses:
+        '200':
+          description: Succes Create Product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  status:
+                    type: string
+                    example: "OK"
+                  data:
+                    $ref: '#/components/schemas/Product'
+    
+  /produtcs/{productId}:
+    get:
+      security:
+        - ProductAuth: []
+      tags:
+        - Products API
+      description: Get Product by ID
+      summary: Get Product by ID
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: number
+          required: true
+          description: The product ID
+      responses:
+        '200':
+          description: Succes get Product by ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  status:
+                    type: string
+                    example: "OK"
+                  data:
+                    $ref: '#/components/schemas/Product'
+    put: 
+      security:
+        - ProductAuth: []
+      tags:
+        - Products API
+      description: Update Product by ID
+      summary: Update Product by ID
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: number
+          required: true
+          description: The product ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateProduct'
+      responses:
+        '200':
+          description: Succes Update Product by ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  status:
+                    type: string
+                    example: "OK"
+                  data:
+                    $ref: '#/components/schemas/Product'
+    delete:
+      security:
+        - ProductAuth: []
+      tags:
+        - Products API
+      description: Delete Product
+      summary: Delete Product
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: number
+          required: true
+          description: The product ID
+      responses:
+        '200':
+          description: Succes delete Product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  status:
+                    type: string
+                    example: "OK"
+
+
+components:
+  securitySchemes:
+    ProductAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Authentication for Product API
+  schemas:
+    CreateOrUpdateProduct:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Product A"
+        price:
+          type: number
+          example: 100000
+        description:
+          type: string
+          example: "This is product A"
+    Product:
+      type: object
+      properties:
+        id:
+          type: number
+          example: "1"
+        name:
+          type: string
+          example: "Product A"
+        price:
+          type: number
+          example: 100000
+        description:
+          type: string
+          example: "This is product A"
+
+
+

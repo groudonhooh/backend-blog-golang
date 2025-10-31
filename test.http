@@ -1,0 +1,85 @@
+
+
+GET http://localhost:5000/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MDk5ODI2OSwiaWF0IjoxNzYwOTExODY5fQ.eGi_i6IHgqfU5tKjbQy5ZCme7vy3-71-W_55dvK6RnI
+Accept: application/json
+
+### REGISTER USER
+POST http://localhost:5000/api/users/register
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "",
+  "email": "alsya123@gmail.com",
+  "password": "alsya123"
+}
+
+### LOGIN USER
+POST http://localhost:5000/api/users/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "alsya00900@gmail.com",
+  "password": "alsya123"
+}
+
+
+### CREAT NEW POST
+
+POST http://localhost:5000/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+Content-Type: application/json
+
+{
+  "title": "",
+  "content": "INI BERITA HOAX KELIMA",
+  "image_url": "www.image.com/fazel225.jpg",
+  "category_id": [1, 3, 5]
+}
+
+### GET PRODUCT BY ID
+GET http://localhost:5000/api/posts/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTI0NDQwNSwiaWF0IjoxNzYxMTU4MDA1fQ.U1bQblonjdtRAkEgjXigvpxzgAkLDo_sSNyvEED-m-8
+Accept: application/json
+
+
+### DELETE PRODUCT
+DELETE http://localhost:5000/api/posts/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTI0MjY5NiwiaWF0IjoxNzYxMTU2Mjk2fQ.h_zuCwOtwoWsvy1OWTbbul-lMtWWEjbceW5YZb_A_vA
+Accept: application/json
+
+### UPDATE NEW POST
+PUT http://localhost:5000/api/posts/10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTI0MTA4NywiaWF0IjoxNzYxMTU0Njg3fQ.-T_N_t9AijJflT43sCNs9kd33hZ3jW-_st0EKCF2vQQ
+Content-Type: application/json
+
+{
+  "title": "SAHRONI MASUK KADANG",
+  "content": "ASFBASOIVBASVNBIASNVSANVPOANSVPOSANV",
+  "image_url": "www.image.com/alsya.jpg"
+}
+
+### CREATE COMMENT
+POST http://localhost:5000/api/posts/26/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+Content-Type: application/json
+
+{
+  "content": "HOAX JIRRR"
+}
+
+### CREAT NEW CATEGORY
+POST http://localhost:5000/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### GET ALL CATEGORIES
+GET http://localhost:5000/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+Accept: application/json
