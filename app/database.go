@@ -28,6 +28,8 @@ func NewDB() *sql.DB {
 	db, err := sql.Open("mysql", dsn)
 	helper.PanicIfError(err)
 
+	fmt.Println("Database connected successfully")
+
 	db.SetConnMaxLifetime(time.Minute * 60)
 	db.SetMaxOpenConns(20)
 	db.SetMaxIdleConns(5)
