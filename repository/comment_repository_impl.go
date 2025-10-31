@@ -14,8 +14,8 @@ func NewCommentRepository() CommentRepository {
 }
 
 func (repository CommentRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, comment domain.Comment) domain.Comment {
-	sql := "INSERT INTO comments(content, post_id, author_id) VALUES (?, ?, ?)"
-	result, err := tx.ExecContext(ctx, sql, comment.Content, comment.PostId, comment.AuthorId)
+	sql := "INSERT INTO comments(content, post_id, author_id, created_at) VALUES (?, ?, ?)"
+	result, err := tx.ExecContext(ctx, sql, comment.Content, comment.PostId, comment.AuthorId, comment.CreatedAt)
 	helper.PanicIfError(err)
 
 	id, err := result.LastInsertId()
