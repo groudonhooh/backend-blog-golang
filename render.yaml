@@ -7,17 +7,5 @@ services:
     buildCommand: go build -o main
     startCommand: ./main
     envVars:
-      - key: DB_USER
-        value: root
-      - key: DB_PASS
-        value: SmPdNOMDJSUtAibfwtdPOTjLNlOnYobk
-      - key: DB_HOST
-        value: switchyard.proxy.rlwy.net
-      - key: DB_PORT
-        value: 35991
-      - key: DB_NAME
-        value: railway
-      - key: JWT_SECRET
-        value: a99NU0T8VMlTD3SUdQcQEbUZs4IxpFrEM8NVW7GXo1g=
       - key: APP_PORT
         value: 5000
