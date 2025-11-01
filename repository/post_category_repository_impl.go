@@ -22,6 +22,22 @@ func (repository *PostCategoryRepositoryImpl) Create(ctx context.Context, tx *sq
 	return nil
 }
 
+func (repository *PostCategoryRepositoryImpl) FindCategoryIdsByPostId(ctx context.Context, tx *sql.Tx, postId int) []int {
+	SQL := "SELECT category_id FROM post_categories WHERE post_id = ?"
+	rows, err := tx.QueryContext(ctx, SQL, postId)
+	helper.PanicIfError(err)
+	defer rows.Close()
+
+	var categoryIds []int
+	for rows.Next() {
+		var categoryId int
+		err := rows.Scan(&categoryId)
+		helper.PanicIfError(err)
+		categoryIds = append(categoryIds, categoryId)
+	}
+	return categoryIds
+}
+
 func (repository *PostCategoryRepositoryImpl) DeleteByPostId(ctx context.Context, tx *sql.Tx, postId int) error {
 	SQL := "DELETE FROM post_categories WHERE post_id = ?"
 	_, err := tx.ExecContext(ctx, SQL, postId)

@@ -14,5 +14,5 @@ type PostService interface {
 	Update(ctx context.Context, request web.PostUpdateRequest) web.PostResponse
 	Delete(ctx context.Context, postId int)
 	FindById(ctx context.Context, postId int) web.PostResponse
-	FindAll(ctx context.Context) []web.PostResponse
+	FindAll(ctx context.Context, categorySlug string) []web.PostResponse
 }

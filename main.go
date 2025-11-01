@@ -41,10 +41,12 @@ func main() {
 	// ====== ROUTER SETUP ======
 	router := app.NewRouter(postController, userController, commentController, categoryController)
 
+	handler := middleware.EnableCORS(middleware.NewAuthMiddleware(router))
+
 	// ====== SERVER SETUP ======
 	server := http.Server{
 		Addr:    "localhost:5000",
-		Handler: middleware.NewAuthMiddleware(router),
+		Handler: handler,
 	}
 
 	fmt.Println("Server running at http://localhost:5000")

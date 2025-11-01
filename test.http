@@ -11,8 +11,8 @@ Content-Type: application/json
 
 {
   "username": "",
-  "email": "alsya123@gmail.com",
-  "password": "alsya123"
+  "email": "groudonhooh@gmail.com",
+  "password": "groudon123"
 }
 
 ### LOGIN USER
@@ -21,22 +21,22 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "alsya00900@gmail.com",
-  "password": "alsya123"
+  "email": "groudonhooh@gmail.com",
+  "password": "groudon123"
 }
 
 
 ### CREAT NEW POST
 
 POST http://localhost:5000/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MjEwMDM0MSwiaWF0IjoxNzYyMDEzOTQxfQ.jF3IOTObk3uH5iA1tiRG7UyaVMbzpGQddP33I6izlfE
 Content-Type: application/json
 
 {
-  "title": "",
-  "content": "INI BERITA HOAX KELIMA",
-  "image_url": "www.image.com/fazel225.jpg",
-  "category_id": [1, 3, 5]
+  "title": "LAPANGAN MENGGUNAKAN TEKNOLOGI AI2",
+  "content": "PERKEMBAGAN AI SANGAT PESAT DENGAN INOVASI TERBARU YANG AKAN MENGUBAH DUNIA DI MASA DEPAN",
+  "image_url": "https://cdn.grid.id/crop/0x0:0x0/700x465/photo/2024/11/15/lapangan-sepak-bolajpg-20241115074613.jpg",
+  "category_ids": [2, 4]
 }
 
 ### GET PRODUCT BY ID
@@ -51,35 +51,35 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc
 Accept: application/json
 
 ### UPDATE NEW POST
-PUT http://localhost:5000/api/posts/10
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTI0MTA4NywiaWF0IjoxNzYxMTU0Njg3fQ.-T_N_t9AijJflT43sCNs9kd33hZ3jW-_st0EKCF2vQQ
+PUT http://localhost:5000/api/posts/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MjEwMDM0MSwiaWF0IjoxNzYyMDEzOTQxfQ.jF3IOTObk3uH5iA1tiRG7UyaVMbzpGQddP33I6izlfE
 Content-Type: application/json
 
 {
-  "title": "SAHRONI MASUK KADANG",
-  "content": "ASFBASOIVBASVNBIASNVSANVPOANSVPOSANV",
-  "image_url": "www.image.com/alsya.jpg"
+  "title": "",
+  "content": "PERKEMBAGAN AI SANGAT PESAT DENGAN INOVASI TERBARU YANG AKAN MENGUBAH DUNIA DI MASA DEPAN",
+  "image_url": "https://specials-images.forbesimg.com/imageserve/6669d56e40a694388fdc74ea/Robot-fishing-on-jetty--3d-rendering/960x0.jpg?fit=scale"
 }
 
 ### CREATE COMMENT
-POST http://localhost:5000/api/posts/26/comments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+POST http://localhost:5000/api/posts/2/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MjEwMDM0MSwiaWF0IjoxNzYyMDEzOTQxfQ.jF3IOTObk3uH5iA1tiRG7UyaVMbzpGQddP33I6izlfE
 Content-Type: application/json
 
 {
-  "content": "HOAX JIRRR"
+  "content": "APAAN SI KELIATAN BANGET HAX NYA"
 }
 
 ### CREAT NEW CATEGORY
 POST http://localhost:5000/api/categories
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MjEwMDM0MSwiaWF0IjoxNzYyMDEzOTQxfQ.jF3IOTObk3uH5iA1tiRG7UyaVMbzpGQddP33I6izlfE
 Content-Type: application/json
 
 {
-  "name": ""
+  "name": "bisnis"
 }
 
 ### GET ALL CATEGORIES
 GET http://localhost:5000/api/categories
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MjEwMDM0MSwiaWF0IjoxNzYyMDEzOTQxfQ.jF3IOTObk3uH5iA1tiRG7UyaVMbzpGQddP33I6izlfE
 Accept: application/json

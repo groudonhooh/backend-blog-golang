@@ -5,15 +5,17 @@ import (
 	"belajar-rest-api-golang/model/web"
 )
 
-func ToPostResponse(post domain.Post) web.PostResponse {
+func ToPostResponse(post domain.Post, categoryIds []int) web.PostResponse {
 	return web.PostResponse{
-		Id:        post.Id,
-		Title:     post.Title,
-		Slug:      post.Slug,
-		Content:   post.Content,
-		ImageURL:  post.ImageURL,
-		AuthorId:  post.AuthorId,
-		CreatedAt: post.CreatedAt,
+		Id:          post.Id,
+		Title:       post.Title,
+		Slug:        post.Slug,
+		Content:     post.Content,
+		ImageURL:    post.ImageURL,
+		AuthorId:    post.AuthorId,
+		Author:      post.Author,
+		CategoryIds: categoryIds,
+		CreatedAt:   post.CreatedAt,
 	}
 }
 
@@ -47,7 +49,7 @@ func ToCategoryResponses(categories []domain.Category) []web.CategoryResponse {
 func ToPostResponses(posts []domain.Post) []web.PostResponse {
 	var postResponses []web.PostResponse
 	for _, post := range posts {
-		postResponses = append(postResponses, ToPostResponse(post))
+		postResponses = append(postResponses, ToPostResponse(post, nil))
 	}
 	return postResponses
 }

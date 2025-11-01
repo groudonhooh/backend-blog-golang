@@ -17,5 +17,6 @@ type PostRepository interface {
 	Delete(ctx context.Context, tx *sql.Tx, post domain.Post)
 	FindById(ctx context.Context, tx *sql.Tx, postId int) (domain.Post, error)
 	FindAll(ctx context.Context, tx *sql.Tx) []domain.Post
+	FindAllByCategorySlug(ctx context.Context, tx *sql.Tx, slug string) []domain.Post
 	FindAuthorIdByPostId(ctx context.Context, tx *sql.Tx, postId int) (int, error)
 }

@@ -96,7 +96,9 @@ func (controller *PostControllerImpl) FindById(writer http.ResponseWriter, reque
 }
 
 func (controller *PostControllerImpl) FindAll(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	postResponses := controller.PostService.FindAll(request.Context())
+	categorySlug := request.URL.Query().Get("category")
+
+	postResponses := controller.PostService.FindAll(request.Context(), categorySlug)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",

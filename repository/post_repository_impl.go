@@ -23,17 +23,20 @@ func (repository *PostRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, post
 	id, err := result.LastInsertId()
 	helper.PanicIfError(err)
 
-	query := "SELECT id, title, slug, content, image_url, author_id, created_at FROM posts WHERE id = ?"
+	query := `SELECT p.id, p.title, p.slug, p.content, p.image_url, p.author_id, u.username, p.created_at
+		FROM posts p
+		JOIN user u ON p.author_id = u.id
+		WHERE p.id = ?`
 	row := tx.QueryRowContext(ctx, query, id)
 
-	err = row.Scan(&post.Id, &post.Title, &post.Slug, &post.Content, &post.ImageURL, &post.AuthorId, &post.CreatedAt)
+	err = row.Scan(&post.Id, &post.Title, &post.Slug, &post.Content, &post.ImageURL, &post.AuthorId, &post.Author, &post.CreatedAt)
 	helper.PanicIfError(err)
 
 	return post
 }
 
 func (repository *PostRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, post domain.Post) domain.Post {
-	SQL := "update posts set title = ?, content = ?, image_url = ? where id = ?"
+	SQL := "UPDATE posts set title = ?, content = ?, image_url = ? where id = ?"
 	_, err := tx.ExecContext(ctx, SQL, post.Title, post.Content, post.ImageURL, post.Id)
 	helper.PanicIfError(err)
 
@@ -48,14 +51,17 @@ func (repository *PostRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, po
 }
 
 func (repository *PostRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, postId int) (domain.Post, error) {
-	SQL := "Select id, title, content, image_url, author_id, created_at from posts where id = ?"
+	SQL := `SELECT p.id, p.title, p.slug, p.content, p.image_url, p.author_id, u.username, p.created_at
+		FROM posts p
+		JOIN user u ON p.author_id = u.id
+		WHERE p.id = ?`
 	rows, err := tx.QueryContext(ctx, SQL, postId)
 	helper.PanicIfError(err)
 	defer rows.Close()
 
 	post := domain.Post{}
 	if rows.Next() {
-		err := rows.Scan(&post.Id, &post.Title, &post.Content, &post.ImageURL, &post.AuthorId, &post.CreatedAt)
+		err := rows.Scan(&post.Id, &post.Title, &post.Slug, &post.Content, &post.ImageURL, &post.AuthorId, &post.CreatedAt)
 		helper.PanicIfError(err)
 		return post, nil
 	} else {
@@ -64,7 +70,7 @@ func (repository *PostRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, 
 }
 
 func (repository *PostRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.Post {
-	SQL := "Select id, title, content, image_url, author_id, created_at from posts"
+	SQL := "SELECT p.id, p.title, p.slug, p.content, p.image_url, p.author_id, u.username, p.created_at FROM posts p JOIN user u ON p.author_id = u.id ORDER BY p.created_at DESC"
 	rows, err := tx.QueryContext(ctx, SQL)
 	helper.PanicIfError(err)
 	defer rows.Close()
@@ -72,7 +78,7 @@ func (repository *PostRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) [
 	var posts []domain.Post
 	for rows.Next() {
 		post := domain.Post{}
-		err := rows.Scan(&post.Id, &post.Title, &post.Content, &post.ImageURL, &post.AuthorId, &post.CreatedAt)
+		err := rows.Scan(&post.Id, &post.Title, &post.Slug, &post.Content, &post.ImageURL, &post.AuthorId, &post.Author, &post.CreatedAt)
 		helper.PanicIfError(err)
 		posts = append(posts, post)
 	}
@@ -90,4 +96,27 @@ func (repository *PostRepositoryImpl) FindAuthorIdByPostId(ctx context.Context, 
 	}
 
 	return authorId, nil
+}
+
+func (repository *PostRepositoryImpl) FindAllByCategorySlug(ctx context.Context, tx *sql.Tx, slug string) []domain.Post {
+	SQL := `
+        SELECT p.id, p.title, p.slug, p.content, p.image_url, p.author_id, p.created_at
+        FROM posts p
+        JOIN post_categories pc ON p.id = pc.post_id
+        JOIN categories c ON pc.category_id = c.id
+        WHERE c.slug = ?
+        ORDER BY p.created_at DESC
+    `
+	rows, err := tx.QueryContext(ctx, SQL, slug)
+	helper.PanicIfError(err)
+	defer rows.Close()
+
+	var posts []domain.Post
+	for rows.Next() {
+		post := domain.Post{}
+		err := rows.Scan(&post.Id, &post.Title, &post.Slug, &post.Content, &post.ImageURL, &post.AuthorId, &post.CreatedAt)
+		helper.PanicIfError(err)
+		posts = append(posts, post)
+	}
+	return posts
 }

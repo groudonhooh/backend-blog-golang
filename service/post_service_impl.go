@@ -45,23 +45,23 @@ func (service *PostServiceImpl) Create(ctx context.Context, request web.PostCrea
 	defer helper.CommitOrRollback(tx)
 
 	post := domain.Post{
-		Id:         0,
-		Title:      request.Title,
-		Slug:       generatePostSlug(request.Title),
-		Content:    request.Content,
-		ImageURL:   request.ImageURL,
-		AuthorId:   userId,
-		CategoryId: request.CategoryId,
+		Id:       0,
+		Title:    request.Title,
+		Slug:     generatePostSlug(request.Title),
+		Content:  request.Content,
+		ImageURL: request.ImageURL,
+		AuthorId: userId,
 	}
 
 	post = service.PostRepository.Save(ctx, tx, post)
 
-	if len(request.CategoryId) > 0 {
-		err := service.PostCategoryRepository.Create(ctx, tx, post.Id, request.CategoryId)
+	if len(request.CategoryIds) > 0 {
+		err := service.PostCategoryRepository.Create(ctx, tx, post.Id, request.CategoryIds)
 		helper.PanicIfError(err)
 	}
 
-	return helper.ToPostResponse(post)
+	categoryIds := service.PostCategoryRepository.FindCategoryIdsByPostId(ctx, tx, post.Id)
+	return helper.ToPostResponse(post, categoryIds)
 }
 func (service *PostServiceImpl) Update(ctx context.Context, request web.PostUpdateRequest) web.PostResponse {
 	err := service.Validate.Struct(request)
@@ -93,7 +93,7 @@ func (service *PostServiceImpl) Update(ctx context.Context, request web.PostUpda
 
 	post = service.PostRepository.Update(ctx, tx, post)
 
-	return helper.ToPostResponse(post)
+	return helper.ToPostResponse(post, nil)
 }
 
 func (service *PostServiceImpl) Delete(ctx context.Context, postId int) {
@@ -129,15 +129,28 @@ func (service *PostServiceImpl) FindById(ctx context.Context, postId int) web.Po
 		panic(exception.NewNotFoundError(err.Error()))
 	}
 
-	return helper.ToPostResponse(post)
+	categoryIds := service.PostCategoryRepository.FindCategoryIdsByPostId(ctx, tx, post.Id)
+	return helper.ToPostResponse(post, categoryIds)
 }
 
-func (service *PostServiceImpl) FindAll(ctx context.Context) []web.PostResponse {
+func (service *PostServiceImpl) FindAll(ctx context.Context, categorySlug string) []web.PostResponse {
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	posts := service.PostRepository.FindAll(ctx, tx)
+	var posts []domain.Post
+	if categorySlug != "" {
+		posts = service.PostRepository.FindAllByCategorySlug(ctx, tx, categorySlug)
+	} else {
+		posts = service.PostRepository.FindAll(ctx, tx)
+	}
 
-	return helper.ToPostResponses(posts)
+	// ambil category id per post
+	var postResponses []web.PostResponse
+	for _, post := range posts {
+		categoryIds := service.PostCategoryRepository.FindCategoryIdsByPostId(ctx, tx, post.Id)
+		postResponses = append(postResponses, helper.ToPostResponse(post, categoryIds))
+	}
+
+	return postResponses
 }
