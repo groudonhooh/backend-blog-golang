@@ -154,3 +154,24 @@ func (service *PostServiceImpl) FindAll(ctx context.Context, categorySlug string
 
 	return postResponses
 }
+
+func (service *PostServiceImpl) FindBySlug(ctx context.Context, slug string) web.PostResponse {
+	tx, err := service.DB.Begin()
+	helper.PanicIfError(err)
+	defer tx.Commit()
+
+	post, err := service.PostRepository.FindBySlug(ctx, tx, slug)
+	if err != nil {
+		helper.PanicIfError(err) // atau handle error untuk not found
+	}
+
+	return web.PostResponse{
+		Id:        post.Id,
+		Title:     post.Title,
+		Slug:      post.Slug,
+		Content:   post.Content,
+		ImageURL:  post.ImageURL,
+		Author:    post.Author,
+		CreatedAt: post.CreatedAt,
+	}
+}

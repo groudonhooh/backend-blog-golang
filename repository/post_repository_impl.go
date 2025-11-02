@@ -120,3 +120,19 @@ func (repository *PostRepositoryImpl) FindAllByCategorySlug(ctx context.Context,
 	}
 	return posts
 }
+
+func (repository *PostRepositoryImpl) FindBySlug(ctx context.Context, tx *sql.Tx, slug string) (domain.Post, error) {
+	SQL := `SELECT p.id, p.title, p.slug, p.content, p.image_url, p.author_id, u.username, p.created_at
+	        FROM posts p
+	        JOIN user u ON p.author_id = u.id
+	        WHERE p.slug = ?`
+	row := tx.QueryRowContext(ctx, SQL, slug)
+
+	post := domain.Post{}
+	err := row.Scan(&post.Id, &post.Title, &post.Slug, &post.Content, &post.ImageURL, &post.AuthorId, &post.Author, &post.CreatedAt)
+	if err != nil {
+		return post, err
+	}
+
+	return post, nil
+}

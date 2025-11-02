@@ -107,3 +107,16 @@ func (controller *PostControllerImpl) FindAll(writer http.ResponseWriter, reques
 
 	helper.WriteToResponseBody(writer, webResponse)
 }
+
+func (controller *PostControllerImpl) FindBySlug(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	slug := params.ByName("slug") // ambil slug dari route
+
+	postResponse := controller.PostService.FindBySlug(request.Context(), slug) // pastikan PostService punya method FindBySlug
+	webResponse := web.WebResponse{
+		Code:   200,
+		Status: "OK",
+		Data:   postResponse,
+	}
+
+	helper.WriteToResponseBody(writer, webResponse)
+}

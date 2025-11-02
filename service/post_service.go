@@ -15,4 +15,5 @@ type PostService interface {
 	Delete(ctx context.Context, postId int)
 	FindById(ctx context.Context, postId int) web.PostResponse
 	FindAll(ctx context.Context, categorySlug string) []web.PostResponse
+	FindBySlug(ctx context.Context, slug string) web.PostResponse
 }

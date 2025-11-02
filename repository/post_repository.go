@@ -19,4 +19,5 @@ type PostRepository interface {
 	FindAll(ctx context.Context, tx *sql.Tx) []domain.Post
 	FindAllByCategorySlug(ctx context.Context, tx *sql.Tx, slug string) []domain.Post
 	FindAuthorIdByPostId(ctx context.Context, tx *sql.Tx, postId int) (int, error)
+	FindBySlug(ctx context.Context, tx *sql.Tx, slug string) (domain.Post, error)
 }

@@ -33,7 +33,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc
 Content-Type: application/json
 
 {
-  "title": "LAPANGAN MENGGUNAKAN TEKNOLOGI AI2",
+  "title": "LAPANGAN MENGGUNAKAN TEKNOLOGI AI3",
   "content": "PERKEMBAGAN AI SANGAT PESAT DENGAN INOVASI TERBARU YANG AKAN MENGUBAH DUNIA DI MASA DEPAN",
   "image_url": "https://cdn.grid.id/crop/0x0:0x0/700x465/photo/2024/11/15/lapangan-sepak-bolajpg-20241115074613.jpg",
   "category_ids": [2, 4]

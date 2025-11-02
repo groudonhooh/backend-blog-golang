@@ -42,6 +42,8 @@ func (middleware *AuthMiddleware) ServeHTTP(writer http.ResponseWriter, request 
 	publicPaths := []string{
 		"/api/users/login",
 		"/api/users/register",
+		"/api/posts",
+		"/api/categories",
 	}
 
 	// Allow public paths to bypass authentication
