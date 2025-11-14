@@ -1,13 +1,9 @@
 package middleware
 
-import "net/http"
-
-var allowedOrigins = []string{
-	"https://frontend-blog-react.vercel.app",
-	"https://frontend-blog-react.vercel.app/",
-	"http://103.174.114.55",
-	"http://103.174.114.55/",
-}
+import (
+	"net/http"
+	"strings"
+)
 
 // EnableCORS menambahkan header agar frontend (mis. Vite/React) bisa mengakses API
 func EnableCORS(next http.Handler) http.Handler {
@@ -16,11 +12,8 @@ func EnableCORS(next http.Handler) http.Handler {
 		origin := r.Header.Get("Origin")
 
 		// Cek apakah origin ada dalam daftar allowedOrigins
-		for _, allowed := range allowedOrigins {
-			if origin == allowed {
-				w.Header().Set("Access-Control-Allow-Origin", origin)
-				break
-			}
+		if strings.Contains(origin, "vercel.app") || strings.Contains(origin, "103.174.114.55") {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
 		}
 
 		// Izinkan origin React-mu (ubah jika perlu)
