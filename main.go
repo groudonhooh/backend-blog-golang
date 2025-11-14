@@ -45,11 +45,11 @@ func main() {
 
 	// ====== SERVER SETUP ======
 	server := http.Server{
-		Addr:    "localhost:5000",
+		Addr:    "0.0.0.0:5000",
 		Handler: handler,
 	}
 
-	fmt.Println("Server running at http://localhost:5000")
+	fmt.Println("Server running at http://0.0.0.0:5000")
 	err := server.ListenAndServe()
 	helper.PanicIfError(err)
 }
