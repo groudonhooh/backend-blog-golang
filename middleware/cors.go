@@ -6,7 +6,7 @@ import (
 
 var allowedOrigins = []string{
 	"http://localhost:5173", // Ganti dengan origin React-mu
-	"https://frontend-blog-vercel.vercel.app",
+	"https://frontend-blog-react.vercel.app",
 	"https://api-bloghub.my.id",
 }
 
