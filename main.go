@@ -41,7 +41,8 @@ func main() {
 	// ====== ROUTER SETUP ======
 	router := app.NewRouter(postController, userController, commentController, categoryController)
 
-	handler := middleware.EnableCORS(middleware.NewAuthMiddleware(router))
+	handler := middleware.EnableCORS(router)
+	handler = middleware.NewAuthMiddleware(handler)
 
 	// ====== SERVER SETUP ======
 	server := http.Server{
