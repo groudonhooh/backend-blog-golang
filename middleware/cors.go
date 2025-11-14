@@ -3,7 +3,6 @@ package middleware
 import "net/http"
 
 var allowedOrigins = []string{
-	"http://localhost:5173",
 	"https://frontend-blog-react.vercel.app",
 	"https://frontend-blog-react.vercel.app/",
 	"http://103.174.114.55",
