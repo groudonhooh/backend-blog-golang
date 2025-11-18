@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
+	"github.com/julienschmidt/httprouter"
 )
 
 type UserControllerImpl struct {
@@ -21,7 +22,7 @@ func NewUserController(userService service.UserService) *UserControllerImpl {
 	}
 }
 
-func (controller *UserControllerImpl) Register(writer http.ResponseWriter, request *http.Request) {
+func (controller *UserControllerImpl) Register(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	var registerRequest web.UserRegisterRequest
 	helper.ReadFromRequestBody(request, &registerRequest)
 
@@ -39,7 +40,7 @@ func (controller *UserControllerImpl) Register(writer http.ResponseWriter, reque
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (controller *UserControllerImpl) Login(writer http.ResponseWriter, request *http.Request) {
+func (controller *UserControllerImpl) Login(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	var loginRequest web.UserLoginRequest
 	helper.ReadFromRequestBody(request, &loginRequest)
 
@@ -60,7 +61,7 @@ func (controller *UserControllerImpl) Login(writer http.ResponseWriter, request 
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (controller *UserControllerImpl) Logout(writer http.ResponseWriter, request *http.Request) {
+func (controller *UserControllerImpl) Logout(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	webResponse := web.WebResponse{
 		Code:   http.StatusOK,
 		Status: "Logged Out",

@@ -30,10 +30,12 @@ func main() {
 	userService := service.NewUserService(userRepository, db, validate)
 	userController := controller.NewUserController(userService)
 
+	// ====== COMMENT SETUP ======
 	comentRepository := repository.NewCommentRepository()
 	commentService := service.NewCommentService(comentRepository, postRepository, db, validate)
 	commentController := controller.NewCommentController(commentService)
 
+	// ====== CATEGORY SETUP ======
 	categoryRepository := repository.NewCategoryRepository()
 	categoryService := service.NewCategoryService(categoryRepository, db, validate)
 	categoryController := controller.NewCategoryController(categoryService)

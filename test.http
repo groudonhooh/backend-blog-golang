@@ -1,22 +1,21 @@
 
 
-GET http://localhost:5000/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MDk5ODI2OSwiaWF0IjoxNzYwOTExODY5fQ.eGi_i6IHgqfU5tKjbQy5ZCme7vy3-71-W_55dvK6RnI
+GET https://api-bloghub.my.id/api/posts
 Accept: application/json
 
 ### REGISTER USER
-POST http://localhost:5000/api/users/register
+POST https://api-bloghub.my.id/api/users/register
 Accept: application/json
 Content-Type: application/json
 
 {
-  "username": "",
-  "email": "groudonhooh@gmail.com",
-  "password": "groudon123"
+  "username": "jangkrik",
+  "email": "jangkrik@gmail.com",
+  "password": "jangkrik123"
 }
 
 ### LOGIN USER
-POST http://localhost:5000/api/users/login
+POST https://api-bloghub.my.id/api/users/login
 Accept: application/json
 Content-Type: application/json
 
@@ -28,15 +27,14 @@ Content-Type: application/json
 
 ### CREAT NEW POST
 
-POST http://localhost:5000/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MjEwMDM0MSwiaWF0IjoxNzYyMDEzOTQxfQ.jF3IOTObk3uH5iA1tiRG7UyaVMbzpGQddP33I6izlfE
-Content-Type: application/json
+POST https://api-bloghub.my.id/api/post
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MzIxNDE3MiwiaWF0IjoxNzYzMTI3NzcyfQ.MnTjpzqayz5OFw4VKnBmuLBJbxvphZXGIc064e8eC-4
 
 {
-  "title": "LAPANGAN MENGGUNAKAN TEKNOLOGI AI3",
-  "content": "PERKEMBAGAN AI SANGAT PESAT DENGAN INOVASI TERBARU YANG AKAN MENGUBAH DUNIA DI MASA DEPAN",
-  "image_url": "https://cdn.grid.id/crop/0x0:0x0/700x465/photo/2024/11/15/lapangan-sepak-bolajpg-20241115074613.jpg",
-  "category_ids": [2, 4]
+  "title": "Oppo Apex Guard: Standar Baru Kualitas Smartphone dengan 180 Uji Ketat",
+  "content": "secara resmi memperkenalkan Apex Guard, sebuah terobosan rangkaian teknologi komprehensif yang dirancang untuk melindungi pengalaman pengguna melalui kualitas perangkat keras dan lunak yang baru. Inisiatif terbaru ini menandai langkah Oppo dalam mendefinisikan ulang ekspektasi terhadap smartphone, tidak hanya untuk penggunaan sehari-hari, tetapi juga untuk memperpanjang usia pakai perangkat. Director of Manufacturing OPPO Grus Shan menjelaskan, Oppo menekankan komitmennya untuk menanamkan kualitas di setiap tahap pengembangan produk, mulai dari riset awal hingga validasi akhir perangkat. Kualitas adalah fondasi segalanya. Melalui terobosan berkelanjutan dalam kualitas, OPPO berkomitmen untuk melindungi kebebasan setiap pengguna dalam perjalanan hidup mereka, jelas Grus Shan dalam acara di pusat penelitian dan pengembangan (R&D) OPPO, Binhai Bay Campus, Shenzhen, China, dikutip Jumat (14/11/2025).",
+  "image_url": "https://www.oppo.com/content/dam/oppo_com/en/mkt/newsroom/press/2025/11/oppo-quality-next-level-binhai-bay-hardware-coloros-16/01-header-2400px.webp",
+  "category_ids": [4]
 }
 
 ### GET PRODUCT BY ID
@@ -71,15 +69,14 @@ Content-Type: application/json
 }
 
 ### CREAT NEW CATEGORY
-POST http://localhost:5000/api/categories
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MjEwMDM0MSwiaWF0IjoxNzYyMDEzOTQxfQ.jF3IOTObk3uH5iA1tiRG7UyaVMbzpGQddP33I6izlfE
+POST http://103.174.114.55/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MzIwNDg3MCwiaWF0IjoxNzYzMTE4NDcwfQ.9nJS2Q_BpJACQF9e6ZcuqVq9l1v6szsIFTbS9x6Jy-I
 Content-Type: application/json
 
 {
-  "name": "bisnis"
+  "name": "teknologi"
 }
 
 ### GET ALL CATEGORIES
-GET http://localhost:5000/api/categories
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MjEwMDM0MSwiaWF0IjoxNzYyMDEzOTQxfQ.jF3IOTObk3uH5iA1tiRG7UyaVMbzpGQddP33I6izlfE
-Accept: application/json
+GET https://api-bloghub.my.id/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MzIwNDg3MCwiaWF0IjoxNzYzMTE4NDcwfQ.9nJS2Q_BpJACQF9e6ZcuqVq9l1v6szsIFTbS9x6Jy-I

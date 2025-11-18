@@ -3,7 +3,6 @@ package app
 import (
 	"belajar-rest-api-golang/controller"
 	"belajar-rest-api-golang/exception"
-	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -11,15 +10,9 @@ import (
 func NewRouter(postController controller.PostController, userController *controller.UserControllerImpl, commentController controller.CommentController, categoryController controller.CategoryController) *httprouter.Router {
 	router := httprouter.New()
 
-	router.POST("/api/users/register", func(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-		userController.Register(writer, request)
-	})
-	router.POST("/api/users/login", func(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-		userController.Login(writer, request)
-	})
-	router.POST("/api/users/logout", func(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-		userController.Logout(writer, request)
-	})
+	router.POST("/api/users/register", userController.Register)
+	router.POST("/api/users/login", userController.Login)
+	router.POST("/api/users/logout", userController.Logout)
 
 	router.POST("/api/categories", categoryController.Create)
 	router.GET("/api/categories", categoryController.FindAll)

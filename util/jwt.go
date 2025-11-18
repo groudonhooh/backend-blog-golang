@@ -43,7 +43,7 @@ func ValidateToken(tokenString string) (*JwtCustomClaims, error) {
 		return getJwtSecret(), nil
 	})
 	if err != nil {
-		return nil, err // Jangan panic di sini, cukup return error
+		return nil, err
 	}
 
 	if claims, ok := token.Claims.(*JwtCustomClaims); ok && token.Valid {
